@@ -30,12 +30,13 @@
   .task-list::-webkit-scrollbar-thumb:hover {
     background: #4f46e5;
   }
-
+   /* Styling for completed tasks */
   .completed {
     text-decoration: line-through;
     color: #6b7280;
   }
 
+ /* Simple transition for buttons */
   button {
     transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
   }
@@ -48,6 +49,15 @@
     font-weight: 600;
   }
 </style>
+
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <header class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 text-white text-center">
+      <h1 class="text-3xl md:text-4xl font-bold">TimeSaver</h1>
+      <p class="text-indigo-100 mt-1">Your Task Organizer for Busy Days</p>
+    </header>
+  </div>
+  
+
  
 </head>
 <body class="min-h-screen p-4 md:p-8">
