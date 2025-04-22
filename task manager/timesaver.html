@@ -11,11 +11,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
     body {
+        /* Apply Inter font globally */
       font-family: 'Inter', sans-serif;
       background-color: #f0f4f8;
     }
-  </style>
-  
+    /* Custom scrollbar for task list */
+    .task-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  .task-list::-webkit-scrollbar-track {
+    background: #e0e7ff;
+    border-radius: 3px;
+  }
+  .task-list::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 3px;
+  }
+  .task-list::-webkit-scrollbar-thumb:hover {
+    background: #4f46e5;
+  }
+
+  .completed {
+    text-decoration: line-through;
+    color: #6b7280;
+  }
+
+  button {
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  }
+  button:active {
+    transform: scale(0.98);
+  }
+
+  #timer-display {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+</style>
+ 
 </head>
 <body class="min-h-screen p-4 md:p-8">
 </body>
