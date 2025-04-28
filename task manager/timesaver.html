@@ -327,3 +327,36 @@
   <p id="quote-text" class="italic text-sm md:text-base mb-2">"Loading quote..."</p>
   <p id="quote-author" class="font-medium text-xs md:text-sm">- Loading</p>
 </section>
+<button id="chatToggleButton" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 text-white rounded-full p-4 shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-2 focus:ring-offset-[var(--bg-accent)]">
+  <i class="fas fa-comment-dots fa-lg"></i>
+  <svg class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.08-3.239A8.962 8.962 0 011 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0H9v2h2V9z" clip-rule="evenodd"></path></svg>
+</button>
+
+<div id="chatWindow" class="fixed bottom-[80px] right-5 md:right-8 z-40 w-[90vw] max-w-sm h-[60vh] max-h-[500px] glassmorphism shadow-xl flex flex-col transition-all duration-300 ease-in-out transform scale-95 opacity-0 hidden">
+  <div class="flex justify-between items-center p-3 border-b border-[var(--chatbot-glass-border)] rounded-t-lg">
+      <h3 class="text-lg font-semibold">Chat Assistant</h3>
+      <button id="closeChatButton" class="hover:opacity-100 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+      </button>
+  </div>
+  <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3">
+      <div class="flex justify-start">
+          <div class="chat-message bot-msg p-3 rounded-lg rounded-bl-none shadow">
+              Hello! How can I help you with your tasks or focus?
+          </div>
+      </div>
+  </div>
+  <div class="p-3 border-t border-[var(--chatbot-glass-border)] rounded-b-lg">
+      <div class="flex items-center space-x-2">
+          <textarea id="chatInput" rows="1" class="flex-1 p-2 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-[var(--chatbot-button-bg)] sm:text-sm" placeholder="Type your message..."></textarea>
+          <button id="sendButton" class="text-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-90" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+          </button>
+      </div>
+  </div>
+</div>
+
