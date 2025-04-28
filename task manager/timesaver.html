@@ -254,3 +254,17 @@
               <label for="task-input" class="block text-sm font-medium mb-1">Task Description:</label>
               <input type="text" id="task-input" placeholder="E.g., Finalize project report" required class="mt-1 block w-full px-3 py-2 sm:text-sm">
             </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="task-deadline" class="block text-sm font-medium mb-1">Deadline (Optional):</label>
+                <input type="date" id="task-deadline" class="mt-1 block w-full px-3 py-2 sm:text-sm">
+              </div>
+              <div>
+                <label for="task-priority" class="block text-sm font-medium mb-1">Priority:</label>
+                <select id="task-priority" class="mt-1 block w-full px-3 py-2 sm:text-sm">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
