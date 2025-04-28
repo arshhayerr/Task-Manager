@@ -390,6 +390,15 @@ const closeChatButton = document.getElementById('closeChatButton');
 const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
-// --- Sound Synthesis (Tone.js) ---
-let synth, timerEndSound, taskCompleteSound;
+// --- Global State ---
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let currentFilter = 'all'; // 'all', 'active', 'completed'
+let currentSearchTerm = '';
+let timerInterval;
+let totalSeconds;
+let isRunning = false;
+let isWorkSession = true; // true for work, false for break
+const workDuration = 25 * 60; // 25 minutes
+const breakDuration = 5 * 60; // 5 minutes
+let currentTheme = localStorage.getItem('theme') || 'light';
 </script>
