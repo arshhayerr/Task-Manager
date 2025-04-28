@@ -359,4 +359,37 @@
       </div>
   </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/tone@latest"></script>
+<script>
+// --- DOM Elements ---
+const taskForm = document.getElementById('task-form');
+const taskInput = document.getElementById('task-input');
+const taskDeadlineInput = document.getElementById('task-deadline');
+const taskPriorityInput = document.getElementById('task-priority');
+const taskList = document.getElementById('task-list');
+const searchInput = document.getElementById('search-task');
+const filterButtonsContainer = document.getElementById('filter-buttons');
+// Timer Elements
+const timerDisplay = document.getElementById('timer-display');
+const timerStatus = document.getElementById('timer-status');
+const startPauseButton = document.getElementById('start-pause-button');
+const resetButton = document.getElementById('reset-button');
+// Review Elements
+const weeklyProgressBar = document.getElementById('weekly-progress-bar');
+const weeklyProgressPercentage = document.getElementById('weekly-progress-percentage');
+const reviewStats = document.getElementById('review-stats');
+// Quote Elements
+const quoteText = document.getElementById('quote-text');
+const quoteAuthor = document.getElementById('quote-author');
+// Theme Toggle
+const themeToggleButton = document.getElementById('theme-toggle');
+// Chatbot Elements
+const chatToggleButton = document.getElementById('chatToggleButton');
+const chatWindow = document.getElementById('chatWindow');
+const closeChatButton = document.getElementById('closeChatButton');
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const sendButton = document.getElementById('sendButton');
+// --- Sound Synthesis (Tone.js) ---
+let synth, timerEndSound, taskCompleteSound;
+</script>
