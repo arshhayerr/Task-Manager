@@ -1,94 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TimeSaver - Task Organizer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    body {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeSaver Pro - Task Organizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
         /* Apply Inter font globally */
-      font-family: 'Inter', sans-serif;
-      background-color: #f0f4f8;
-    }
-    /* Custom scrollbar for task list */
-    .task-list::-webkit-scrollbar {
-    width: 6px;
-  }
-  .task-list::-webkit-scrollbar-track {
-    background: #e0e7ff;
-    border-radius: 3px;
-  }
-  .task-list::-webkit-scrollbar-thumb {
-    background: #6366f1;
-    border-radius: 3px;
-  }
-  .task-list::-webkit-scrollbar-thumb:hover {
-    background: #4f46e5;
-  }
-   /* Styling for completed tasks */
-  .completed {
-    text-decoration: line-through;
-    color: #6b7280;
-  }
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb; /* Gray 50 */
+            --bg-accent: #f0f4f8; /* Custom light blue-gray */
+            --text-primary: #1f2937; /* Gray 800 */
+            --text-secondary: #4b5563; /* Gray 600 */
+            --text-accent: #4f46e5; /* Indigo 600 */
+            --border-color: #e5e7eb; /* Gray 200 */
+            --header-bg-start: #4f46e5; /* Indigo 600 */
+            --header-bg-end: #7c3aed; /* Purple 600 */
+            --header-text: #ffffff;
+            --button-primary-bg: #4f46e5; /* Indigo 600 */
+            --button-primary-hover: #4338ca; /* Indigo 700 */
+            --button-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+            --input-bg: #ffffff;
+            --input-border: #d1d5db; /* Gray 300 */
+            --input-focus-ring: #a5b4fc; /* Indigo 300 */
+            --priority-low-bg: #eff6ff; --priority-low-text: #3b82f6; /* Blue */
+            --priority-medium-bg: #fefce8; --priority-medium-text: #ca8a04; /* Yellow */
+            --priority-high-bg: #fef2f2; --priority-high-text: #dc2626; /* Red */
+            --completed-bg: #f0fdf4; /* Green 50 */
+            --completed-border: #bbf7d0; /* Green 200 */
+            --completed-text-color: #6b7280;
+            --pomodoro-bg-start: #fef3c7; --pomodoro-bg-end: #fde68a; /* Amber */
+            --pomodoro-border: #fcd34d;
+            --pomodoro-text: #a16207;
+            --review-bg-start: #ecfdf5; --review-bg-end: #a7f3d0; /* Emerald */
+            --review-border: #6ee7b7;
+            --review-text: #047857;
+            --quote-bg-start: #f5f3ff; --quote-bg-end: #e9d5ff; /* Purple */
+            --quote-border: #d8b4fe;
+            --quote-text: #6b21a8;
+            --progress-bg: #e5e7eb;
+            --progress-fill: #34d399; /* Emerald 400 */
+            --chatbot-button-bg: #3b82f6; /* Blue 500 */
+            --chatbot-button-hover: #2563eb; /* Blue 600 */
+            --chatbot-glass-bg: rgba(255, 255, 255, 0.5);
+            --chatbot-glass-border: rgba(255, 255, 255, 0.6);
+            --chatbot-header-bg: rgba(255, 255, 255, 0.2);
+            --chatbot-input-bg: rgba(255, 255, 255, 0.7);
+            --chatbot-text: #1f2937;
+            --chatbot-msg-user-bg: #3b82f6;
+            --chatbot-msg-bot-bg: #e5e7eb;
+            --chatbot-msg-bot-text: #1f2937;
+        }
 
- /* Simple transition for buttons */
-  button {
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-  }
-  button:active {
-    transform: scale(0.98);
-  }
-
-  #timer-display {
-    font-size: 3rem;
-    font-weight: 600;
-  }
-</style>
-</head>
-<body class="min-h-screen p-4 md:p-8">
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-    <header class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 text-white text-center">
-      <h1 class="text-3xl md:text-4xl font-bold">TimeSaver</h1>
-      <p class="text-indigo-100 mt-1">Your Task Organizer for Busy Days</p>
-    </header>
-
-    <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="space-y-6">
-        <!-- Add New Task Section -->
-        <section class="bg-gray-50 p-4 rounded-lg shadow-sm">
-          <h2 class="text-xl font-semibold text-gray-700 mb-3">Add New Task</h2>
-          <form id="task-form" class="space-y-3">
-            <div>
-              <label for="task-input" class="block text-sm font-medium text-gray-600">Task Description:</label>
-              <input type="text" id="task-input" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-            <div>
-              <label for="task-deadline" class="block text-sm font-medium text-gray-600">Deadline (Optional):</label>
-              <input type="date" id="task-deadline" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md shadow">
-              <i class="fas fa-plus mr-2"></i>Add Task
-            </button>
-          </form>
-        </section>
- <!-- Today's Tasks Section -->
-        <section class="bg-gray-50 p-4 rounded-lg shadow-sm">
-          <h2 class="text-xl font-semibold text-gray-700 mb-3">Today's Tasks</h2>
-          <ul id="task-list" class="task-list max-h-60 overflow-y-auto space-y-2 pr-2">
-            <li class="text-gray-500 italic">No tasks added yet.</li>
-          </ul>
-        </section>
-      </div>
-  
-  
-
- 
-</head>
-<body class="min-h-screen p-4 md:p-8">
-</body>
-</html>
+        .dark {
+            /* Dark Theme */
+            --bg-primary: #111827; /* Gray 900 */
+            --bg-secondary: #1f2937; /* Gray 800 */
+            --bg-accent: #0f172a; /* Slate 900 */
+            --text-primary: #f3f4f6; /* Gray 100 */
+            --text-secondary: #9ca3af; /* Gray 400 */
+            --text-accent: #818cf8; /* Indigo 400 */
+            --border-color: #374151; /* Gray 700 */
+            --header-bg-start: #3730a3; /* Indigo 800 */
+            --header-bg-end: #5b21b6; /* Purple 800 */
+            --header-text: #e5e7eb; /* Gray 200 */
+            --button-primary-bg: #6366f1; /* Indigo 500 */
+            --button-primary-hover: #818cf8; /* Indigo 400 */
+            --button-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --card-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+            --input-bg: #374151; /* Gray 700 */
+            --input-border: #4b5563; /* Gray 600 */
+            --input-focus-ring: #6366f1; /* Indigo 500 */
+            --priority-low-bg: #1e3a8a; --priority-low-text: #93c5fd; /* Blue */
+            --priority-medium-bg: #78350f; --priority-medium-text: #fde047; /* Yellow */
+            --priority-high-bg: #991b1b; --priority-high-text: #fecaca; /* Red */
+            --completed-bg: #14532d; /* Dark Green */
+            --completed-border: #15803d; /* Darker Green */
+            --completed-text-color: #9ca3af;
+            --pomodoro-bg-start: #451a03; --pomodoro-bg-end: #713f12; /* Dark Amber */
+            --pomodoro-border: #a16207;
+            --pomodoro-text: #fef3c7;
+            --review-bg-start: #064e3b; --review-bg-end: #065f46; /* Dark Emerald */
+            --review-border: #047857;
+            --review-text: #a7f3d0;
+            --quote-bg-start: #3b0764; --quote-bg-end: #581c87; /* Dark Purple */
+            --quote-border: #7e22ce;
+            --quote-text: #e9d5ff;
+            --progress-bg: #374151;
+            --progress-fill: #6ee7b7; /* Emerald 300 */
+            --chatbot-button-bg: #60a5fa; /* Blue 400 */
+            --chatbot-button-hover: #93c5fd; /* Blue 300 */
+            --chatbot-glass-bg: rgba(31, 41, 55, 0.6); /* Gray 800 base */
+            --chatbot-glass-border: rgba(55, 65, 81, 0.7); /* Gray 700 base */
+            --chatbot-header-bg: rgba(55, 65, 81, 0.3);
+            --chatbot-input-bg: rgba(55, 65, 81, 0.8);
+            --chatbot-text: #f3f4f6;
+            --chatbot-msg-user-bg: #60a5fa;
+            --chatbot-msg-bot-bg: #4b5563; /* Gray 600 */
+            --chatbot-msg-bot-text: #f3f4f6;
+        }
