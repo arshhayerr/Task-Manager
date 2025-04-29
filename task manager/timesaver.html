@@ -1,41 +1,36 @@
-// Sort tasks: incomplete first, then by priority (high > medium > low), then by creation date (newest first)
-const priorityOrder = { high: 3, medium: 2, low: 1 };
-filteredTasks.sort((a, b) =>
-    a.completed - b.completed ||
-    (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0) ||
-    b.id - a.id
-);
+// Priority Tag
+                    const prioritySpan = document.createElement('span');
+                    prioritySpan.textContent = task.priority || 'low';
+                    prioritySpan.className = priority-tag priority-${task.priority || 'low'};
+                    descriptionSpan.appendChild(prioritySpan);
 
-filteredTasks.forEach(task => ){
-    const li = document.createElement('li');
-    li.className = task-item flex items-center justify-between p-3 rounded-lg shadow-sm border border-[var(--border-color)] bg-[var(--bg-primary)] ${task.completed ? 'completed' : 'hover:bg-[var(--bg-secondary)]'};
-    li.dataset.id = task.id;
+                    taskContent.appendChild(descriptionSpan);
 
-    const taskContent = document.createElement('div');
-    taskContent.className = 'flex-grow mr-3 overflow-hidden';
+                    // Deadline Info
+                    if (task.deadline && !task.completed) {
+                        const deadlineSpan = document.createElement('span');
+                        const deadlineDate = new Date(task.deadline + 'T00:00:00');
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
 
-    if (task.isEditing) {
-        // --- Editing State ---
-         // (Code for editing inputs - unchanged from previous version)
-        const editInput = document.createElement('input');
-        editInput.type = 'text';
-        editInput.value = task.description;
-        editInput.className = 'editing-input task-edit-description w-full sm:w-3/4 mb-1';
-        editInput.required = true;
+                        deadlineSpan.textContent = Due: ${deadlineDate.toLocaleDateString()};
+                        deadlineSpan.className = 'text-xs ml-1 block mt-1';
 
-        const editDeadline = document.createElement('input');
-        editDeadline.type = 'date';
-        editDeadline.value = task.deadline || '';
-        editDeadline.className = 'editing-input task-edit-deadline w-auto text-xs mt-1';
+                        let deadlineColorClass = 'text-[var(--text-secondary)]'; // Default gray
+                        if (deadlineDate < today) {
+                            deadlineColorClass = 'text-red-500 dark:text-red-400 font-semibold';
+                            deadlineSpan.textContent += ' - OVERDUE';
+                        } else if (deadlineDate.getTime() === today.getTime()) {
+                            deadlineColorClass = 'text-orange-500 dark:text-orange-400 font-semibold';
+                            deadlineSpan.textContent += ' - TODAY';
+                        }
+                        deadlineSpan.classList.add(...deadlineColorClass.split(' '));
+                        taskContent.appendChild(deadlineSpan);
+                    }
+                }
 
-        taskContent.appendChild(editInput);
-        taskContent.appendChild(editDeadline);
-        setTimeout(() => editInput.focus(), 0);
+                li.appendChild(taskContent);
 
-    } else {
-        // --- Display State ---
-        const descriptionSpan = document.createElement('span');
-        descriptionSpan.textContent = task.description;
-        descriptionSpan.className = break-words ${task.completed ? 'completed-text' : ''};
-
-    }}
+                // --- Action Buttons ---
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = 'flex-shrink-0 flex items-center space-x-1.5';
