@@ -1,89 +1,57 @@
-// Add Task (unchanged)
-        function addTask(description, deadline, priority) {
-            const newTask = { id: Date.now(), description, deadline: deadline || null, priority: priority || 'low', completed: false, isEditing: false, createdAt: new Date().toISOString() };
-            tasks.push(newTask);
-            saveTasks();
-            renderTasks();
-        }
 
-        // Delete Task (unchanged)
-        function deleteTask(id) {
-            tasks = tasks.filter(task => task.id !== id);
-            saveTasks();
-            renderTasks();
-        }
-
-        // Toggle Task Completion (Added sound)
-        function toggleTaskComplete(id) {
-            let taskCompleted = false;
-            tasks = tasks.map(task => {
-                if (task.id === id) {
-                    const updatedTask = { ...task, completed: !task.completed, isEditing: false };
-                    if (updatedTask.completed) {
-                        taskCompleted = true;
-                    }
-                    return updatedTask;
-                }
-                return task;
+// Event listener for filter buttons
+filterButtonsContainer.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        const filterValue = e.target.dataset.filter;
+        if (filterValue) {
+            currentFilter = filterValue;
+            // Update active button style
+            filterButtonsContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('active');
             });
-
-            if (taskCompleted) {
-                triggerConfetti();
-                if (taskCompleteSound) taskCompleteSound(); // Play sound if initialized
-            }
-
-            saveTasks();
-            renderTasks();
+            e.target.classList.add('active');
+            renderTasks(); // Re-render tasks based on filter
         }
+    }
+});
 
-        // Edit Task (unchanged)
-        function editTask(id) {
-            tasks = tasks.map(task => task.id === id ? { ...task, isEditing: true } : { ...task, isEditing: false });
-            renderTasks();
+
+// --- Pomodoro Timer --- (Added sound on completion)
+function updateTimerDisplay() {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    timerDisplay.textContent = ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')};
+}
+
+function startTimer() {
+    if (isRunning) return;
+    isRunning = true;
+    startPauseButton.innerHTML = '<i class="fas fa-pause mr-1"></i>Pause';
+    startPauseButton.classList.replace('bg-yellow-500', 'bg-orange-500');
+    startPauseButton.classList.replace('hover:bg-yellow-600', 'hover:bg-orange-600');
+    timerStatus.textContent = Status: Running (${isWorkSession ? 'Work' : 'Break'});
+    timerInterval = setInterval(() => {
+        if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            isRunning = false;
+            if (timerEndSound) timerEndSound(); // Play sound if initialized
+            alert(Time's up! Starting ${!isWorkSession ? 'Work' : 'Break'} session.);
+            isWorkSession = !isWorkSession;
+            resetTimer();
+            return;
         }
+        totalSeconds--;
+        updateTimerDisplay();
+    }, 1000);
+}
 
-        // Save Task Edit (unchanged)
-        function saveTaskEdit(id) {
-             const taskLi = taskList.querySelector(li[data-id="${id}"]);
-             if (!taskLi) return;
-             const newDescriptionInput = taskLi.querySelector('.task-edit-description');
-             const newDeadlineInput = taskLi.querySelector('.task-edit-deadline');
-             const newDescription = newDescriptionInput.value.trim();
-             const newDeadline = newDeadlineInput.value;
-             if (!newDescription) { alert("Task description cannot be empty."); newDescriptionInput.focus(); return; }
-            tasks = tasks.map(task => task.id === id ? { ...task, description: newDescription, deadline: newDeadline || null, isEditing: false } : task);
-            saveTasks();
-            renderTasks();
-        }
-
-         // Cancel Task Edit (unchanged)
-        function cancelTaskEdit(id) {
-             tasks = tasks.map(task => task.id === id ? { ...task, isEditing: false } : task);
-             renderTasks();
-        }
-
-        // Save Tasks to localStorage (unchanged)
-        function saveTasks() {
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-
-        // Event listener for task form submission (unchanged)
-        taskForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const description = taskInput.value.trim();
-            const deadline = taskDeadlineInput.value;
-            const priority = taskPriorityInput.value;
-            if (description) {
-                addTask(description, deadline, priority);
-                taskInput.value = '';
-                taskDeadlineInput.value = '';
-                taskPriorityInput.value = 'medium';
-            }
-        });
-
-        // Event listener for search input
-        searchInput.addEventListener('input', (e) => {
-            currentSearchTerm = e.target.value;
-            renderTasks(); // Re-render tasks based on search
-        });
+function pauseTimer() {
+    if (!isRunning) return;
+    isRunning = false;
+    clearInterval(timerInterval);
+    startPauseButton.innerHTML = '<i class="fas fa-play mr-1"></i>Resume';
+    startPauseButton.classList.replace('bg-orange-500', 'bg-yellow-500');
+    startPauseButton.classList.replace('hover:bg-orange-600', 'hover:bg-yellow-600');
+    timerStatus.textContent = Status: Paused (${isWorkSession ? 'Work' : 'Break'});
+}
 
