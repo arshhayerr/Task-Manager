@@ -421,4 +421,51 @@ function initSounds() {
 }
 // Add listener to initialize sounds on first click anywhere
 document.body.addEventListener('click', initSounds, { once: true });
-</script>
+// --- Theme Management ---
+function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                themeToggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Show sun icon
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleButton.innerHTML = '<i class="fas fa-moon"></i>'; // Show moon icon
+            }
+            currentTheme = theme;
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+
+        // --- Task Management ---
+
+        // Function to render tasks (handles filtering and search)
+        function renderTasks() {
+            taskList.innerHTML = ''; // Clear current list
+
+            // Filter tasks based on currentFilter and currentSearchTerm
+            const filteredTasks = tasks.filter(task => {
+                // Filter by status
+                const statusMatch = currentFilter === 'all' ||
+                                    (currentFilter === 'active' && !task.completed) ||
+                                    (currentFilter === 'completed' && task.completed);
+                // Filter by search term (case-insensitive)
+                const searchMatch = !currentSearchTerm ||
+                                    task.description.toLowerCase().includes(currentSearchTerm.toLowerCase());
+
+                return statusMatch && searchMatch;
+            });
+
+            if (filteredTasks.length === 0) {
+                 if (tasks.length === 0) {
+                    taskList.innerHTML = '<li class="text-[var(--text-secondary)] italic p-2">No tasks added yet. Add one above!</li>';
+                 } else if (currentSearchTerm) {
+                     taskList.innerHTML = <li class="text-[var(--text-secondary)] italic p-2">No tasks match your search "${currentSearchTerm}".</li>;
+                 } else {
+                     taskList.innerHTML = <li class="text-[var(--text-secondary)] italic p-2">No ${currentFilter} tasks found.</li>;
+                 }
+                updateWeeklyReview(); // Still update review
+                return;
+            }
+            
