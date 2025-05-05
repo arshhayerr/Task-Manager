@@ -1,123 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimeSaver - Master Your Time</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TimeSaver - Master Your Time (Light/Dark Mode)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+        /* CSS Variables for Light and Dark Theme */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb; /* Gray 50 */
+            --bg-accent: #f0f4f8; /* Custom light blue-gray */
+            --text-primary: #1f2937; /* Gray 800 - This is dark in light mode */
+            --text-secondary: #4b5563; /* Gray 600 */
+            --text-accent: #4f46e5; /* Indigo 600 */
+            --border-color: #e5e7eb; /* Gray 200 */
+            --header-bg-start: #4f46e5; /* Indigo 600 */
+            --header-bg-end: #7c3aed; /* Purple 600 */
+            --header-text: #ffffff;
+            --button-primary-bg: #4f46e5; /* Indigo 600 */
+            --button-primary-hover: #4338ca; /* Indigo 700 */
+            --button-text: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+            --input-bg: #ffffff;
+            --input-border: #d1d5db; /* Gray 300 */
+            --input-focus-ring: #a5b4fc; /* Indigo 300 */
+            --priority-low-bg: #eff6ff; --priority-low-text: #3b82f6; /* Blue */
+            --priority-medium-bg: #fefce8; --priority-medium-text: #ca8a04; /* Yellow */
+            --priority-high-bg: #fef2f2; --priority-high-text: #dc2626; /* Red */
+            --completed-bg: #f0fdf4; /* Green 50 */
+            --completed-border: #bbf7d0; /* Green 200 */
+            --completed-text-color: #6b7280;
+            --pomodoro-bg-start: #fef3c7; --pomodoro-bg-end: #fde68a; /* Amber */
+            --pomodoro-border: #fcd34d;
+            --pomodoro-text: #a16207;
+            --review-bg-start: #ecfdf5; --review-bg-end: #a7f3d0; /* Emerald */
+            --review-border: #6ee7b7;
+            --review-text: #047857;
+            --quote-bg-start: #f5f3ff; --quote-bg-end: #e9d5ff; /* Purple */
+            --quote-border: #d8b4fe;
+            --quote-text: #6b21a8;
+            --progress-bg: #e5e7eb;
+            --progress-fill: #34d399; /* Emerald 400 */
+            --chatbot-button-bg: #3b82f6; /* Blue 500 */
+            --chatbot-button-hover: #2563eb; /* Blue 600 */
+            --chatbot-glass-bg: rgba(255, 255, 255, 0.5);
+            --chatbot-glass-border: rgba(255, 255, 255, 0.6);
+            --chatbot-header-bg: rgba(255, 255, 255, 0.2);
+            --chatbot-input-bg: rgba(255, 255, 255, 0.7);
+            --chatbot-text: #1f2937;
+            --chatbot-msg-user-bg: #3b82f6;
+            --chatbot-msg-bot-bg: #e5e7eb;
+            --chatbot-msg-bot-text: #1f2937;
+        }
+
+        .dark {
+            /* Dark Theme */
+                /* Dark Theme - REVISED FOR BETTER CONTRAST */
+    --bg-primary: #111827;      /* Gray 900 - Good dark base */
+    --bg-secondary: #1f2937;    /* Gray 800 - Slightly lighter for sections */
+    --bg-accent: #374151;       /* Gray 700 - Lighter accent/card background */
+    --text-primary: #8f9499;    /* Gray 50 - MUCH LIGHTER for main text (almost white) */
+    --text-secondary: #516686;  /* Gray 300 - Lighter for secondary text */
+    --text-accent: #a5b4fc;     /* Indigo 300 - Lighter accent color */
+    --border-color: #4b5563;    /* Gray 600 - Visible border */
+    --header-bg-start: #3730a3; /* Indigo 800 */
+    --header-bg-end: #5b21b6;   /* Purple 800 */
+    --header-text: #61676c;     /* Gray 50 - Match primary text */
+    --button-primary-bg: #3235bc; /* Indigo 500 */
+    --button-primary-hover: #3241c7e6; /* Indigo 400 */
+    --button-text: #7d7373;     /* White - Max contrast */
+    --shadow-color: rgba(0, 0, 0, 0.3); /* Slightly darker shadow for contrast */
+    --card-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+    --input-bg: #4b5563;        /* Gray 600 - Slightly lighter input */
+    --input-border: #6b7280;    /* Gray 500 */
+    --input-focus-ring: #818cf8; /* Indigo 400 - Lighter ring */
+    /* --- Priority Colors - Adjusted Text for Readability --- */
+    --priority-low-bg: #1e3a8a; --priority-low-text: #bfdbfe; /* Lighter Blue text */
+    --priority-medium-bg: #78350f; --priority-medium-text: #fef08a; /* Lighter Yellow text */
+    --priority-high-bg: #991b1b; --priority-high-text: #fecaca; /* Red text (was ok) */
+    /* --- Completed Task Colors - Adjusted Text for Readability --- */
+    --completed-bg: #14532d;     /* Dark Green */
+    --completed-border: #15803d;   /* Darker Green */
+    --completed-text-color: #a7f3d0; /* MUCH LIGHTER Green text */
+    /* --- Pomodoro/Review/Quote Colors - Adjusted Text for Readability --- */
+    --pomodoro-bg-start: #451a03; --pomodoro-bg-end: #713f12;
+    --pomodoro-border: #a16207;
+    --pomodoro-text: #fef3c7; /* Amber text (was ok) */
+    --review-bg-start: #064e3b; --review-bg-end: #065f46;
+    --review-border: #047857;
+    --review-text: #a7f3d0; /* Emerald text (was ok) */
+    --quote-bg-start: #3b0764; --quote-bg-end: #581c87;
+    --quote-border: #7e22ce;
+    --quote-text: #f5d0fe; /* Lighter Purple text */
+    /* --- Other UI Elements --- */
+    --progress-bg: #374151;     /* Gray 700 */
+    --progress-fill: #6ee7b7;   /* Emerald 300 - Bright fill */
+    --chatbot-button-bg: #60a5fa; /* Blue 400 */
+    --chatbot-button-hover: #93c5fd; /* Blue 300 */
+    --chatbot-glass-bg: rgba(31, 41, 55, 0.7); /* Gray 800 base - More opaque */
+    --chatbot-glass-border: rgba(55, 65, 81, 0.8); /* Gray 700 base */
+    --chatbot-header-bg: rgba(55, 65, 81, 0.4);
+    --chatbot-input-bg: rgba(55, 65, 81, 0.9); /* More opaque input */
+    --chatbot-text: #aeafb0;    /* Gray 50 - Ensure chatbot text is light */
+    --chatbot-msg-user-bg: #60a5fa; /* User msg bg */
+    --chatbot-msg-bot-bg: #4b5563; /* Gray 600 - Bot msg bg */
+    --chatbot-msg-bot-text: #5c5d5e; /* Ensure bot text is light */
+}
+
+
+
         /* Apply Inter font globally */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            overflow-x: hidden; /* Prevent horizontal scrollbars from animations */
+            /* Smooth theme transition - now potentially smoother with variable changes */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+             background-color: var(--bg-secondary); /* Apply variable for light mode body background */
+             color: var(--text-primary); /* Apply variable for light mode body text */
         }
-                /* Custom gradient text */
+         .dark body {
+             background-color: var(--bg-primary); /* Apply variable for dark mode body background */
+             color: var(--text-primary); /* Apply variable for dark mode body text (white) */
+        }
+
+
+        /* Custom gradient text - works in both modes */
         .gradient-text {
-            background: linear-gradient(to right, #6366f1, #a855f7);
+            background: linear-gradient(to right, #6366f1, #a855f7, #ec4899); /* Indigo to Purple to Pink */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-         /* Simple hover effect for feature cards */
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-         /* Button hover effect */
-        .cta-button:hover {
-            transform: scale(1.03);
-        }
-    </style>
-</head>
-<body class="text-gray-800">
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <i class="fas fa-stopwatch text-2xl text-indigo-600 mr-2"></i>
-                    <span class="text-2xl font-bold text-gray-800">Time<span class="text-indigo-600">Saver</span></span>
-                </div>
-                <div class="flex items-center">
-                    <a href="timesaver.html" class="ml-4 px-4 py-2 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
-                        Launch App
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <section class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-20 md:py-32">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-                Stop Racing the Clock, <br class="hidden md:block"> Start <span class="gradient-text">Owning Your Time</span>.
-            </h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Designed for busy students, TimeSaver helps you conquer deadlines, manage tasks effectively, and boost your focus with proven techniques. Finally, take control of your schedule!
-            </p>
-            <a href="timesaver.html" class="cta-button inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transition duration-300 ease-in-out transform">
-                Get Started Now <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </section>
-    <section class="py-16 md:py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Everything You Need to Succeed</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center transition duration-300 ease-in-out">
-                    <div class="mb-4 text-indigo-500">
-                        <i class="fas fa-list-check fa-3x"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Daily Task List</h3>
-                    <p class="text-gray-600">Organize your day with a clear, manageable to-do list.</p>
-                </div>
-                <div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center transition duration-300 ease-in-out">
-                    <div class="mb-4 text-red-500">
-                        <i class="fas fa-calendar-times fa-3x"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Deadline Reminders</h3>
-                    <p class="text-gray-600">Never miss an important deadline again with visual cues.</p>
-                </div>
-                <div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center transition duration-300 ease-in-out">
-                    <div class="mb-4 text-yellow-500">
-                        <i class="fas fa-stopwatch-20 fa-3x"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Pomodoro Timer</h3>
-                    <p class="text-gray-600">Boost focus and prevent burnout with timed work sessions.</p>
-                </div>
-                <div class="feature-card bg-gray-50 p-6 rounded-lg shadow-sm text-center transition duration-300 ease-in-out">
-                    <div class="mb-4 text-green-500">
-                        <i class="fas fa-chart-pie fa-3x"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Weekly Progress</h3>
-                    <p class="text-gray-600">Track your task completion rate and stay motivated.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-16 md:py-24 bg-indigo-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Less Stress, More Success</h2>
-            <p class="text-lg text-gray-700 mb-8">
-                TimeSaver isn't just another to-do list. It's a simple, focused tool built to help students like you reduce overwhelm, improve concentration, and consistently achieve your academic goals.
-            </p>
-            <a href="timesaver.html" class="cta-button inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transition duration-300 ease-in-out transform">
-                Try TimeSaver Today!
-            </a>
-        </div>
-    </section>
-    <footer class="bg-gray-800 text-gray-400 py-6">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-            &copy; 2025 TimeSaver. Built to help you make the most of your time.
-        </div>
-    </footer>
-    
 
-    
-    
-    
-    
-</body>
-</html>
+        /* Enhanced hover effect for feature cards */
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            @apply shadow-xl dark:shadow-lg dark:shadow-indigo-700/30; /* Adjusted dark shadow */
+        }
+
+        /* Enhanced Button hover effect */
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Subtle background pattern for hero - disabled in dark mode */
+        .hero-bg {
+            background-image: radial-gradient(circle at top left, rgba(238, 242, 255, 0.6) 0%, transparent 50%),
+                              radial-gradient(circle at bottom right, rgba(243, 232, 255, 0.6) 0%, transparent 50%);
+            background-size: 300px 300px;
+            background-position: top left, bottom right;
+            background-repeat: no-repeat;
+        }
+
+        .dark .hero-bg {
+            background-image: none; /* Remove pattern in dark mode */
+        }
+
+        /* Ensure hero title is visible in dark mode */
+        /* This rule has higher specificity than the dark:text-white class */
+        .dark section.hero-bg h1 {
+            color: var(--text-primary); /* This is white in dark mode variables */
+        }
+
+
+        /* Footer icon hover */
+        .footer-icon:hover {
+            color: var(--text-accent); /* Use the accent text color variable */
+            transform: scale(1.1);
+        }
+
+        /* Simple pulsing animation for primary CTA */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .95; transform: scale(1.02); }
+        }
+        .cta-pulse {
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+
+        /* Ensure smooth transitions on color changes for most elements */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow */
+        }
+
+
+        /* Applying variables to specific elements */
+        /* Nav links use variables */
+        .nav-link {
+             color: var(--text-secondary); /* Gray 600 equivalent in light, Gray 300 in dark */
+        }
+        .nav-link:hover {
+             color: var(--text-accent); /* Indigo 600 equivalent in light, Indigo 400 in dark */
+        }
+
+
+         /* Section titles use variables */
+         .section-title {
+             color: var(--text-primary); /* Gray 800 equivalent in light, Gray 100 in dark */
+         }
+        /* Section descriptions use variables */
+        .section-description {
+             color: var(--text-secondary); /* Uses updated --text-secondary */
+        }
+
+        /* Feature Card styles - ensure background, heading, and paragraph text use variables */
+        .feature-card {
+            background-color: var(--bg-accent); /* Light gray 100 equivalent in light */
+        }
+        .dark .feature-card {
+             background-color: var(--bg-secondary); /* Gray 800 equivalent in dark */
+        }
+        .feature-card h3 { /* Heading text uses primary text variable */
+             color: var(--text-primary); /* Gray 900 equivalent in light/white in dark */
+        }
+         .feature-card p { /* Paragraph text uses secondary text variable */
+            color: var(--text-secondary); /* Uses updated --text-secondary */
+         }
+
+
+        /* Applying variables to testimonial cards */
+        .testimonial-card {
+             background-color: var(--bg-accent);
+        }
+        .dark .testimonial-card {
+             background-color: var(--bg-secondary);
+        }
+        .testimonial-card blockquote { /* Quote text uses secondary text variable */
+            color: var(--text-secondary); /* Uses updated --text-secondary */
+            font-style: italic; /* Keep italic style */
+            margin-bottom: 1rem; /* Keep margin */
+        }
+        .testimonial-card p.font-semibold { /* Name text uses primary text variable */
+             color: var(--text-primary); /* Gray 800 in light / Gray 100 in dark */
+        }
+         .testimonial-card p.text-sm { /* Title text uses secondary text variable */
+             color: var(--text-secondary); /* Uses updated --text-secondary */
+             font-size: 0.875rem; /* Keep small font size */
+         }
+
+
+        /* Applying variables to FAQ */
+        .faq-question h3 { /* Question text uses accent variable */
+             color: var(--text-accent); /* Indigo 700 in light / Indigo 400 in dark */
+        }
+        .faq-answer p { /* Answer text uses secondary text variable */
+            color: var(--text-secondary); /* Uses updated --text-secondary */
+        }
+
+
+        /* Applying variables to footer */
+        footer {
+            background-color: var(--bg-primary); /* Gray 900 in light / Black in dark */
+            color: var(--text-secondary); /* Gray 400 in light/dark - Keeping this specific color as it was in original footer*/
+        }
+        .dark footer {
+             background-color: var(--bg-primary);
+        }
+
+
+</style>
+<script>
+// Set theme on initial load
+// Needs to run early to prevent flash of unstyled content (FOUC)
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+document.documentElement.classList.add('dark');
+} else {
+document.documentElement.classList.remove('dark');
+}
+</script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
