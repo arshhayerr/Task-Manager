@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimeSaver Pro - Task Organizer</title>
+    <title>TimeSaver  - Task Organizer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,6 +110,7 @@
             --chatbot-msg-bot-bg: #4b5563; /* Gray 600 */
             --chatbot-msg-bot-text: #f3f4f6;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-accent);
@@ -117,7 +118,6 @@
             padding-bottom: 100px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
         /* Custom scrollbar for task list */
         .task-list::-webkit-scrollbar { width: 6px; }
         .task-list::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 3px; }
@@ -138,291 +138,311 @@
         button, .task-item, input, select, textarea, section { transition: all 0.2s ease-in-out; }
         button:active { transform: scale(0.97); }
         .task-item:hover { transform: translateY(-1px); box-shadow: 0 2px 4px var(--shadow-color); }
-                /* Pomodoro timer display */
-                #timer-display { font-size: 3rem; font-weight: 600; letter-spacing: -0.05em; }
 
-/* Progress Bar Styles */
-.progress-bar-bg { background-color: var(--progress-bg); border-radius: 9999px; height: 0.75rem; overflow: hidden; }
-.progress-bar-fill { background-color: var(--progress-fill); height: 100%; border-radius: 9999px; transition: width 0.5s ease-in-out; }
+        /* Pomodoro timer display */
+        #timer-display { font-size: 3rem; font-weight: 600; letter-spacing: -0.05em; }
 
-/* Editing input style */
-.editing-input { border: 1px solid var(--input-focus-ring); background-color: var(--input-bg); color: var(--text-primary); border-radius: 4px; padding: 2px 4px; font-size: inherit; width: 90%; }
+        /* Progress Bar Styles */
+        .progress-bar-bg { background-color: var(--progress-bg); border-radius: 9999px; height: 0.75rem; overflow: hidden; }
+        .progress-bar-fill { background-color: var(--progress-fill); height: 100%; border-radius: 9999px; transition: width 0.5s ease-in-out; }
 
-/* General Card Styling */
-.card { background-color: var(--bg-primary); border-radius: 0.75rem; /* rounded-xl */ box-shadow: var(--card-shadow); overflow: hidden; }
-.card-section { background-color: var(--bg-secondary); padding: 1rem; border-radius: 0.5rem; /* rounded-lg */ box-shadow: 0 1px 2px 0 var(--shadow-color); border: 1px solid var(--border-color); color: var(--text-primary); }
-.card-section h2 { color: var(--text-primary); }
-.card-section label { color: var(--text-secondary); }
-.card-section input, .card-section select, .card-section textarea {
-    background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
-    color: var(--text-primary);
-    border-radius: 0.375rem; /* rounded-md */
-}
- .card-section input:focus, .card-section select:focus, .card-section textarea:focus {
-    outline: none;
-    border-color: var(--text-accent);
-    box-shadow: 0 0 0 2px var(--input-focus-ring);
-}
-.primary-button {
-    background-color: var(--button-primary-bg);
-    color: var(--button-text);
-    font-weight: 600; /* semibold */
-    padding: 0.5rem 1rem; /* py-2 px-4 */
-    border-radius: 0.375rem; /* rounded-md */
-    box-shadow: 0 1px 2px 0 var(--shadow-color);
-}
-.primary-button:hover { background-color: var(--button-primary-hover); }
-/* Filter/Search Styles */
-.filter-button {
-    background-color: var(--bg-secondary);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    padding: 0.3rem 0.75rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-.filter-button:hover { background-color: var(--border-color); color: var(--text-primary); }
-.filter-button.active { background-color: var(--text-accent); color: var(--button-text); border-color: var(--text-accent); }
-#search-task { padding-left: 2.5rem; /* Space for icon */ }
-/* Theme Toggle Styles */
-#theme-toggle { background: none; border: none; color: var(--header-text); cursor: pointer; font-size: 1.25rem; opacity: 0.8; }
-#theme-toggle:hover { opacity: 1; }
-/* Gradient Sections */
-.pomodoro-section { background-image: linear-gradient(to bottom right, var(--pomodoro-bg-start), var(--pomodoro-bg-end)); border-color: var(--pomodoro-border); }
-.pomodoro-section h2, .pomodoro-section #timer-display { color: var(--pomodoro-text); }
-.pomodoro-section #timer-status { color: var(--text-secondary); } /* Use secondary text for status */
-.review-section { background-image: linear-gradient(to bottom right, var(--review-bg-start), var(--review-bg-end)); border-color: var(--review-border); }
-.review-section h2, .review-section #weekly-progress-percentage { color: var(--review-text); }
-.review-section p, .review-section #review-stats { color: var(--text-secondary); }
-.quote-section { background-image: linear-gradient(to bottom right, var(--quote-bg-start), var(--quote-bg-end)); border-color: var(--quote-border); }
-.quote-section h2 { color: var(--quote-text); }
-.quote-section #quote-text { color: var(--quote-text); opacity: 0.9; }
-.quote-section #quote-author { color: var(--quote-text); opacity: 0.7; }
-/* --- Chatbot Styles --- */
-#chatToggleButton { background-color: var(--chatbot-button-bg); }
-#chatToggleButton:hover { background-color: var(--chatbot-button-hover); }
-.chat-message { max-width: 80%; word-wrap: break-word; }
-.glassmorphism {
-    background: var(--chatbot-glass-bg);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border: 1px solid var(--chatbot-glass-border);
-    border-radius: 12px;
-    color: var(--chatbot-text);
-}
-#chatWindow .rounded-t-lg { background-color: var(--chatbot-header-bg); }
-#chatWindow .rounded-b-lg { background-color: var(--chatbot-header-bg); } /* Match header/footer */
-#chatWindow h3 { color: var(--chatbot-text); }
-#chatWindow #closeChatButton { color: var(--chatbot-text); opacity: 0.7; }
-#chatWindow #closeChatButton:hover { opacity: 1; }
-#chatMessages::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
-#chatMessages::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.3); }
-.dark #chatMessages::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.3); }
-#chatInput {
-    background-color: var(--chatbot-input-bg);
-    border-color: var(--chatbot-glass-border);
-    color: var(--chatbot-text);
-}
-#chatInput::placeholder { color: var(--chatbot-text); opacity: 0.6; }
-#sendButton { background-color: var(--chatbot-button-bg); }
-#sendButton:hover { background-color: var(--chatbot-button-hover); }
-/* Chat message bubbles */
-.chat-message.user-msg { background-color: var(--chatbot-msg-user-bg); color: var(--button-text); }
-.chat-message.bot-msg { background-color: var(--chatbot-msg-bot-bg); color: var(--chatbot-msg-bot-text); }
-</style>
+        /* Editing input style */
+        .editing-input { border: 1px solid var(--input-focus-ring); background-color: var(--input-bg); color: var(--text-primary); border-radius: 4px; padding: 2px 4px; font-size: inherit; width: 90%; }
+
+        /* General Card Styling */
+        .card { background-color: var(--bg-primary); border-radius: 0.75rem; /* rounded-xl */ box-shadow: var(--card-shadow); overflow: hidden; }
+        .card-section { background-color: var(--bg-secondary); padding: 1rem; border-radius: 0.5rem; /* rounded-lg */ box-shadow: 0 1px 2px 0 var(--shadow-color); border: 1px solid var(--border-color); color: var(--text-primary); }
+        .card-section h2 { color: var(--text-primary); }
+        .card-section label { color: var(--text-secondary); }
+        .card-section input, .card-section select, .card-section textarea {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-primary);
+            border-radius: 0.375rem; /* rounded-md */
+        }
+         .card-section input:focus, .card-section select:focus, .card-section textarea:focus {
+            outline: none;
+            border-color: var(--text-accent);
+            box-shadow: 0 0 0 2px var(--input-focus-ring);
+        }
+        .primary-button {
+            background-color: var(--button-primary-bg);
+            color: var(--button-text);
+            font-weight: 600; /* semibold */
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 1px 2px 0 var(--shadow-color);
+        }
+        .primary-button:hover { background-color: var(--button-primary-hover); }
+
+        /* Filter/Search Styles */
+        .filter-button {
+             background-color: var(--bg-secondary);
+             color: var(--text-secondary);
+             border: 1px solid var(--border-color);
+             padding: 0.3rem 0.75rem;
+             border-radius: 0.375rem;
+             font-size: 0.875rem;
+             font-weight: 500;
+        }
+        .filter-button:hover { background-color: var(--border-color); color: var(--text-primary); }
+        .filter-button.active { background-color: var(--text-accent); color: var(--button-text); border-color: var(--text-accent); }
+        #search-task { padding-left: 2.5rem; /* Space for icon */ }
+
+        /* Theme Toggle Styles */
+        #theme-toggle { background: none; border: none; color: var(--header-text); cursor: pointer; font-size: 1.25rem; opacity: 0.8; }
+        #theme-toggle:hover { opacity: 1; }
+
+        /* Gradient Sections */
+        .pomodoro-section { background-image: linear-gradient(to bottom right, var(--pomodoro-bg-start), var(--pomodoro-bg-end)); border-color: var(--pomodoro-border); }
+        .pomodoro-section h2, .pomodoro-section #timer-display { color: var(--pomodoro-text); }
+        .pomodoro-section #timer-status { color: var(--text-secondary); } /* Use secondary text for status */
+        .review-section { background-image: linear-gradient(to bottom right, var(--review-bg-start), var(--review-bg-end)); border-color: var(--review-border); }
+        .review-section h2, .review-section #weekly-progress-percentage { color: var(--review-text); }
+        .review-section p, .review-section #review-stats { color: var(--text-secondary); }
+        .quote-section { background-image: linear-gradient(to bottom right, var(--quote-bg-start), var(--quote-bg-end)); border-color: var(--quote-border); }
+        .quote-section h2 { color: var(--quote-text); }
+        .quote-section #quote-text { color: var(--quote-text); opacity: 0.9; }
+        .quote-section #quote-author { color: var(--quote-text); opacity: 0.7; }
+
+
+        /* --- Chatbot Styles --- */
+        #chatToggleButton { background-color: var(--chatbot-button-bg); }
+        #chatToggleButton:hover { background-color: var(--chatbot-button-hover); }
+        .chat-message { max-width: 80%; word-wrap: break-word; }
+        .glassmorphism {
+            background: var(--chatbot-glass-bg);
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            border: 1px solid var(--chatbot-glass-border);
+            border-radius: 12px;
+            color: var(--chatbot-text);
+        }
+        #chatWindow .rounded-t-lg { background-color: var(--chatbot-header-bg); }
+        #chatWindow .rounded-b-lg { background-color: var(--chatbot-header-bg); } /* Match header/footer */
+        #chatWindow h3 { color: var(--chatbot-text); }
+        #chatWindow #closeChatButton { color: var(--chatbot-text); opacity: 0.7; }
+        #chatWindow #closeChatButton:hover { opacity: 1; }
+        #chatMessages::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
+        #chatMessages::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.3); }
+        .dark #chatMessages::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.3); }
+        #chatInput {
+            background-color: var(--chatbot-input-bg);
+            border-color: var(--chatbot-glass-border);
+            color: var(--chatbot-text);
+        }
+        #chatInput::placeholder { color: var(--chatbot-text); opacity: 0.6; }
+        #sendButton { background-color: var(--chatbot-button-bg); }
+        #sendButton:hover { background-color: var(--chatbot-button-hover); }
+        /* Chat message bubbles */
+        .chat-message.user-msg { background-color: var(--chatbot-msg-user-bg); color: var(--button-text); }
+        .chat-message.bot-msg { background-color: var(--chatbot-msg-bot-bg); color: var(--chatbot-msg-bot-text); }
+
+    </style>
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
-  <div class="card max-w-5xl mx-auto">
-    <header class="bg-gradient-to-r from-[var(--header-bg-start)] to-[var(--header-bg-end)] p-4 md:p-6 text-[var(--header-text)] flex justify-between items-center shadow-md">
-      <div>
-        <h1 class="text-2xl md:text-3xl font-bold tracking-tight">TimeSaver Pro</h1>
-        <p class="text-sm opacity-80 mt-1">Organize, Focus, Achieve.</p>
-      </div>
-      <button id="theme-toggle" title="Toggle Theme">
-        <i class="fas fa-moon"></i>
-      </button>
-    </header>
-    <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 space-y-6">
-        <section class="card-section">
-          <h2 class="text-xl font-semibold mb-4 border-b pb-2 border-[var(--border-color)]">Add New Task</h2>
-          <form id="task-form" class="space-y-4">
+
+    <div class="card max-w-5xl mx-auto">
+        <header class="bg-gradient-to-r from-[var(--header-bg-start)] to-[var(--header-bg-end)] p-4 md:p-6 text-[var(--header-text)] flex justify-between items-center shadow-md">
             <div>
-              <label for="task-input" class="block text-sm font-medium mb-1">Task Description:</label>
-              <input type="text" id="task-input" placeholder="E.g., Finalize project report" required class="mt-1 block w-full px-3 py-2 sm:text-sm">
+                <h1 class="text-2xl md:text-3xl font-bold tracking-tight">TimeSaver Pro</h1>
+                <p class="text-sm opacity-80 mt-1">Organize, Focus, Achieve.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="task-deadline" class="block text-sm font-medium mb-1">Deadline (Optional):</label>
-                <input type="date" id="task-deadline" class="mt-1 block w-full px-3 py-2 sm:text-sm">
-              </div>
-              <div>
-                <label for="task-priority" class="block text-sm font-medium mb-1">Priority:</label>
-                <select id="task-priority" class="mt-1 block w-full px-3 py-2 sm:text-sm">
-                  <option value="low">Low</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
+            <button id="theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i> </button>
+        </header>
+
+        <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <div class="lg:col-span-2 space-y-6">
+                <section class="card-section">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2 border-[var(--border-color)]">Add New Task</h2>
+                    <form id="task-form" class="space-y-4">
+                        <div>
+                            <label for="task-input" class="block text-sm font-medium mb-1">Task Description:</label>
+                            <input type="text" id="task-input" placeholder="E.g., Finalize project report" required class="mt-1 block w-full px-3 py-2 sm:text-sm">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="task-deadline" class="block text-sm font-medium mb-1">Deadline (Optional):</label>
+                                <input type="date" id="task-deadline" class="mt-1 block w-full px-3 py-2 sm:text-sm">
+                            </div>
+                             <div>
+                                <label for="task-priority" class="block text-sm font-medium mb-1">Priority:</label>
+                                <select id="task-priority" class="mt-1 block w-full px-3 py-2 sm:text-sm">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-button w-full">
+                            <i class="fas fa-plus mr-2"></i>Add Task
+                        </button>
+                    </form>
+                </section>
+
+                <section class="card-section">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3 border-b pb-3 border-[var(--border-color)]">
+                        <h2 class="text-xl font-semibold whitespace-nowrap">Your Tasks</h2>
+                        <div class="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                             <div class="relative flex-grow">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-search text-[var(--text-secondary)] text-sm"></i>
+                                </span>
+                                <input type="search" id="search-task" placeholder="Search tasks..." class="block w-full px-3 py-1.5 sm:text-sm">
+                            </div>
+                            <div id="filter-buttons" class="flex space-x-1 flex-shrink-0">
+                                <button class="filter-button active" data-filter="all">All</button>
+                                <button class="filter-button" data-filter="active">Active</button>
+                                <button class="filter-button" data-filter="completed">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul id="task-list" class="task-list max-h-96 overflow-y-auto space-y-3 pr-2">
+                        <li class="text-[var(--text-secondary)] italic p-2">Loading tasks...</li>
+                    </ul>
+                </section>
             </div>
-            <button type="submit" class="primary-button w-full">
-              <i class="fas fa-plus mr-2"></i>Add Task
+
+            <div class="lg:col-span-1 space-y-6">
+                <section class="card-section pomodoro-section text-center">
+                    <h2 class="text-xl font-semibold mb-3"><i class="fas fa-stopwatch mr-2"></i>Pomodoro Timer</h2>
+                    <div id="timer-display" class="mb-3">25:00</div>
+                    <div id="timer-status" class="text-sm font-medium mb-4">Status: Ready (Work)</div>
+                    <div class="flex justify-center space-x-3">
+                        <button id="start-pause-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-5 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400">
+                            <i class="fas fa-play mr-1"></i>Start
+                        </button>
+                        <button id="reset-button" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
+                            <i class="fas fa-redo mr-1"></i>Reset
+                        </button>
+                    </div>
+                </section>
+
+                <section class="card-section review-section">
+                    <h2 class="text-xl font-semibold mb-3 text-center"><i class="fas fa-chart-line mr-2"></i>Weekly Review</h2>
+                    <p class="text-center text-sm mb-1">Tasks Completed (Last 7 Days):</p>
+                    <div class="progress-bar-bg w-full mb-2">
+                        <div id="weekly-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="text-center">
+                        <span id="weekly-progress-percentage" class="text-2xl font-bold">0%</span>
+                        <span id="review-stats" class="text-sm block">(0 / 0 tasks)</span>
+                    </div>
+                </section>
+
+                 <section class="card-section quote-section text-center">
+                    <h2 class="text-xl font-semibold mb-3"><i class="fas fa-quote-left mr-2"></i>Quote of the Moment</h2>
+                    <p id="quote-text" class="italic text-sm md:text-base mb-2">"Loading quote..."</p>
+                    <p id="quote-author" class="font-medium text-xs md:text-sm">- Loading</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <button id="chatToggleButton" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 text-white rounded-full p-4 shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-2 focus:ring-offset-[var(--bg-accent)]">
+        <i class="fas fa-comment-dots fa-lg"></i>
+        <svg class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.08-3.239A8.962 8.962 0 011 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0H9v2h2V9z" clip-rule="evenodd"></path></svg>
+    </button>
+
+    <div id="chatWindow" class="fixed bottom-[80px] right-5 md:right-8 z-40 w-[90vw] max-w-sm h-[60vh] max-h-[500px] glassmorphism shadow-xl flex flex-col transition-all duration-300 ease-in-out transform scale-95 opacity-0 hidden">
+        <div class="flex justify-between items-center p-3 border-b border-[var(--chatbot-glass-border)] rounded-t-lg">
+            <h3 class="text-lg font-semibold">Chat Assistant</h3>
+            <button id="closeChatButton" class="hover:opacity-100 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </button>
-          </form>
-        </section>
-        <section class="card-section">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3 border-b pb-3 border-[var(--border-color)]">
-            <h2 class="text-xl font-semibold whitespace-nowrap">Your Tasks</h2>
-            <div class="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-              <div class="relative flex-grow">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <i class="fas fa-search text-[var(--text-secondary)] text-sm"></i>
-                </span>
-                <input type="search" id="search-task" placeholder="Search tasks..." class="block w-full px-3 py-1.5 sm:text-sm">
-      </div>
-      <div id="filter-buttons" class="flex space-x-1 flex-shrink-0">
-        <button class="filter-button active" data-filter="all">All</button>
-        <button class="filter-button" data-filter="active">Active</button>
-        <button class="filter-button" data-filter="completed">Done</button>
-      </div>
+        </div>
+        <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3">
+            <div class="flex justify-start">
+                <div class="chat-message bot-msg p-3 rounded-lg rounded-bl-none shadow">
+                    Hello! How can I help you with your tasks or focus?
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border-t border-[var(--chatbot-glass-border)] rounded-b-lg">
+            <div class="flex items-center space-x-2">
+                <textarea id="chatInput" rows="1" class="flex-1 p-2 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-[var(--chatbot-button-bg)] sm:text-sm" placeholder="Type your message..."></textarea>
+                <button id="sendButton" class="text-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-90" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-  <ul id="task-list" class="task-list max-h-96 overflow-y-auto space-y-3 pr-2">
-    <li class="text-[var(--text-secondary)] italic p-2">Loading tasks...</li>
-  </ul>
-</section>
-</div>
-<div class="lg:col-span-1 space-y-6">
-  <section class="card-section pomodoro-section text-center">
-    <h2 class="text-xl font-semibold mb-3"><i class="fas fa-stopwatch mr-2"></i>Pomodoro Timer</h2>
-    <div id="timer-display" class="mb-3">25:00</div>
-    <div id="timer-status" class="text-sm font-medium mb-4">Status: Ready (Work)</div>
-    <div class="flex justify-center space-x-3">
-      <button id="start-pause-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-5 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-yellow-400">
-        <i class="fas fa-play mr-1"></i>Start
-      </button>
-      <button id="reset-button" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-5 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
-        <i class="fas fa-redo mr-1"></i>Reset
-      </button>
-    </div>
-  </section>
-</div>
-<section class="card-section review-section">
-  <h2 class="text-xl font-semibold mb-3 text-center"><i class="fas fa-chart-line mr-2"></i>Weekly Review</h2>
-  <p class="text-center text-sm mb-1">Tasks Completed (Last 7 Days):</p>
-  <div class="progress-bar-bg w-full mb-2">
-      <div id="weekly-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
-  </div>
-  <div class="text-center">
-      <span id="weekly-progress-percentage" class="text-2xl font-bold">0%</span>
-      <span id="review-stats" class="text-sm block">(0 / 0 tasks)</span>
-  </div>
-</section>
-<section class="card-section quote-section text-center">
-  <h2 class="text-xl font-semibold mb-3"><i class="fas fa-quote-left mr-2"></i>Quote of the Moment</h2>
-  <p id="quote-text" class="italic text-sm md:text-base mb-2">"Loading quote..."</p>
-  <p id="quote-author" class="font-medium text-xs md:text-sm">- Loading</p>
-</section>
-<button id="chatToggleButton" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 text-white rounded-full p-4 shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-2 focus:ring-offset-[var(--bg-accent)]">
-  <i class="fas fa-comment-dots fa-lg"></i>
-  <svg class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.08-3.239A8.962 8.962 0 011 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0H9v2h2V9z" clip-rule="evenodd"></path></svg>
-</button>
-<div id="chatWindow" class="fixed bottom-[80px] right-5 md:right-8 z-40 w-[90vw] max-w-sm h-[60vh] max-h-[500px] glassmorphism shadow-xl flex flex-col transition-all duration-300 ease-in-out transform scale-95 opacity-0 hidden">
-  <div class="flex justify-between items-center p-3 border-b border-[var(--chatbot-glass-border)] rounded-t-lg">
-      <h3 class="text-lg font-semibold">Chat Assistant</h3>
-      <button id="closeChatButton" class="hover:opacity-100 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-      </button>
-  </div>
-  <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3">
-      <div class="flex justify-start">
-          <div class="chat-message bot-msg p-3 rounded-lg rounded-bl-none shadow">
-              Hello! How can I help you with your tasks or focus?
-          </div>
-      </div>
-  </div>
-  <div class="p-3 border-t border-[var(--chatbot-glass-border)] rounded-b-lg">
-      <div class="flex items-center space-x-2">
-          <textarea id="chatInput" rows="1" class="flex-1 p-2 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-[var(--chatbot-button-bg)] sm:text-sm" placeholder="Type your message..."></textarea>
-          <button id="sendButton" class="text-white rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[var(--chatbot-button-bg)] focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-90" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-              </svg>
-          </button>
-      </div>
-  </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/tone@latest"></script>
-<script>
-// --- DOM Elements ---
-const taskForm = document.getElementById('task-form');
-const taskInput = document.getElementById('task-input');
-const taskDeadlineInput = document.getElementById('task-deadline');
-const taskPriorityInput = document.getElementById('task-priority');
-const taskList = document.getElementById('task-list');
-const searchInput = document.getElementById('search-task');
-const filterButtonsContainer = document.getElementById('filter-buttons');
-// Timer Elements
-const timerDisplay = document.getElementById('timer-display');
-const timerStatus = document.getElementById('timer-status');
-const startPauseButton = document.getElementById('start-pause-button');
-const resetButton = document.getElementById('reset-button');
-// Review Elements
-const weeklyProgressBar = document.getElementById('weekly-progress-bar');
-const weeklyProgressPercentage = document.getElementById('weekly-progress-percentage');
-const reviewStats = document.getElementById('review-stats');
-// Quote Elements
-const quoteText = document.getElementById('quote-text');
-const quoteAuthor = document.getElementById('quote-author');
-// Theme Toggle
-const themeToggleButton = document.getElementById('theme-toggle');
-// Chatbot Elements
-const chatToggleButton = document.getElementById('chatToggleButton');
-const chatWindow = document.getElementById('chatWindow');
-const closeChatButton = document.getElementById('closeChatButton');
-const chatMessages = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
-const sendButton = document.getElementById('sendButton');
-// --- Global State ---
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let currentFilter = 'all'; // 'all', 'active', 'completed'
-let currentSearchTerm = '';
-let timerInterval;
-let totalSeconds;
-let isRunning = false;
-let isWorkSession = true; // true for work, false for break
-const workDuration = 25 * 60; // 25 minutes
-const breakDuration = 5 * 60; // 5 minutes
-let currentTheme = localStorage.getItem('theme') || 'light';
-// --- Sound Synthesis (Tone.js) ---
-let synth, timerEndSound, taskCompleteSound;
-// Initialize sounds after user interaction (e.g., first click) to comply with autoplay policies
-function initSounds() {
-    if (!synth) {
-        Tone.start(); // Start audio context on user interaction
-        synth = new Tone.Synth().toDestination();
-        // Define sounds
-        timerEndSound = () => {
-            synth.triggerAttackRelease("C5", "8n", Tone.now());
-            synth.triggerAttackRelease("G4", "8n", Tone.now() + 0.2);
-        };
-        taskCompleteSound = () => {
-            synth.triggerAttackRelease("E5", "16n", Tone.now());
-            synth.triggerAttackRelease("G5", "16n", Tone.now() + 0.1);
-        };
-        // Remove the listener after initialization
-        document.body.removeEventListener('click', initSounds);
-        console.log("Audio context started and sounds initialized.");
-    }
-}
-// Add listener to initialize sounds on first click anywhere
-document.body.addEventListener('click', initSounds, { once: true });
-// --- Theme Management ---
-function applyTheme(theme) {
+    <script>
+        // --- DOM Elements ---
+        const taskForm = document.getElementById('task-form');
+        const taskInput = document.getElementById('task-input');
+        const taskDeadlineInput = document.getElementById('task-deadline');
+        const taskPriorityInput = document.getElementById('task-priority');
+        const taskList = document.getElementById('task-list');
+        const searchInput = document.getElementById('search-task');
+        const filterButtonsContainer = document.getElementById('filter-buttons');
+        // Timer Elements
+        const timerDisplay = document.getElementById('timer-display');
+        const timerStatus = document.getElementById('timer-status');
+        const startPauseButton = document.getElementById('start-pause-button');
+        const resetButton = document.getElementById('reset-button');
+        // Review Elements
+        const weeklyProgressBar = document.getElementById('weekly-progress-bar');
+        const weeklyProgressPercentage = document.getElementById('weekly-progress-percentage');
+        const reviewStats = document.getElementById('review-stats');
+        // Quote Elements
+        const quoteText = document.getElementById('quote-text');
+        const quoteAuthor = document.getElementById('quote-author');
+        // Theme Toggle
+        const themeToggleButton = document.getElementById('theme-toggle');
+        // Chatbot Elements
+        const chatToggleButton = document.getElementById('chatToggleButton');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeChatButton = document.getElementById('closeChatButton');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // --- Global State ---
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let currentFilter = 'all'; // 'all', 'active', 'completed'
+        let currentSearchTerm = '';
+        let timerInterval;
+        let totalSeconds;
+        let isRunning = false;
+        let isWorkSession = true; // true for work, false for break
+        const workDuration = 25 * 60; // 25 minutes
+        const breakDuration = 5 * 60; // 5 minutes
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        // --- Sound Synthesis (Tone.js) ---
+        let synth, timerEndSound, taskCompleteSound;
+        // Initialize sounds after user interaction (e.g., first click) to comply with autoplay policies
+        function initSounds() {
+            if (!synth) {
+                Tone.start(); // Start audio context on user interaction
+                synth = new Tone.Synth().toDestination();
+                // Define sounds
+                timerEndSound = () => {
+                    synth.triggerAttackRelease("C5", "8n", Tone.now());
+                    synth.triggerAttackRelease("G4", "8n", Tone.now() + 0.2);
+                };
+                taskCompleteSound = () => {
+                    synth.triggerAttackRelease("E5", "16n", Tone.now());
+                    synth.triggerAttackRelease("G5", "16n", Tone.now() + 0.1);
+                };
+                // Remove the listener after initialization
+                document.body.removeEventListener('click', initSounds);
+                 console.log("Audio context started and sounds initialized.");
+            }
+        }
+         // Add listener to initialize sounds on first click anywhere
+        document.body.addEventListener('click', initSounds, { once: true });
+
+
+        // --- Theme Management ---
+        function applyTheme(theme) {
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark');
                 themeToggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Show sun icon
@@ -461,11 +481,379 @@ function applyTheme(theme) {
                  if (tasks.length === 0) {
                     taskList.innerHTML = '<li class="text-[var(--text-secondary)] italic p-2">No tasks added yet. Add one above!</li>';
                  } else if (currentSearchTerm) {
-                     taskList.innerHTML = <li class="text-[var(--text-secondary)] italic p-2">No tasks match your search "${currentSearchTerm}".</li>;
+                     taskList.innerHTML = `<li class="text-[var(--text-secondary)] italic p-2">No tasks match your search "${currentSearchTerm}".</li>`;
                  } else {
-                     taskList.innerHTML = <li class="text-[var(--text-secondary)] italic p-2">No ${currentFilter} tasks found.</li>;
+                     taskList.innerHTML = `<li class="text-[var(--text-secondary)] italic p-2">No ${currentFilter} tasks found.</li>`;
                  }
                 updateWeeklyReview(); // Still update review
                 return;
             }
-            
+
+            // Sort tasks: incomplete first, then by priority (high > medium > low), then by creation date (newest first)
+            const priorityOrder = { high: 3, medium: 2, low: 1 };
+            filteredTasks.sort((a, b) =>
+                a.completed - b.completed ||
+                (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0) ||
+                b.id - a.id
+            );
+
+            filteredTasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `task-item flex items-center justify-between p-3 rounded-lg shadow-sm border border-[var(--border-color)] bg-[var(--bg-primary)] ${task.completed ? 'completed' : 'hover:bg-[var(--bg-secondary)]'}`;
+                li.dataset.id = task.id;
+
+                const taskContent = document.createElement('div');
+                taskContent.className = 'flex-grow mr-3 overflow-hidden';
+
+                if (task.isEditing) {
+                    // --- Editing State ---
+                     // (Code for editing inputs - unchanged from previous version)
+                    const editInput = document.createElement('input');
+                    editInput.type = 'text';
+                    editInput.value = task.description;
+                    editInput.className = 'editing-input task-edit-description w-full sm:w-3/4 mb-1';
+                    editInput.required = true;
+
+                    const editDeadline = document.createElement('input');
+                    editDeadline.type = 'date';
+                    editDeadline.value = task.deadline || '';
+                    editDeadline.className = 'editing-input task-edit-deadline w-auto text-xs mt-1';
+
+                    taskContent.appendChild(editInput);
+                    taskContent.appendChild(editDeadline);
+                    setTimeout(() => editInput.focus(), 0);
+
+                } else {
+                    // --- Display State ---
+                    const descriptionSpan = document.createElement('span');
+                    descriptionSpan.textContent = task.description;
+                    descriptionSpan.className = `break-words ${task.completed ? 'completed-text' : ''}`;
+
+                    // Priority Tag
+                    const prioritySpan = document.createElement('span');
+                    prioritySpan.textContent = task.priority || 'low';
+                    prioritySpan.className = `priority-tag priority-${task.priority || 'low'}`;
+                    descriptionSpan.appendChild(prioritySpan);
+
+                    taskContent.appendChild(descriptionSpan);
+
+                    // Deadline Info
+                    if (task.deadline && !task.completed) {
+                        const deadlineSpan = document.createElement('span');
+                        const deadlineDate = new Date(task.deadline + 'T00:00:00');
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+
+                        deadlineSpan.textContent = `Due: ${deadlineDate.toLocaleDateString()}`;
+                        deadlineSpan.className = 'text-xs ml-1 block mt-1';
+
+                        let deadlineColorClass = 'text-[var(--text-secondary)]'; // Default gray
+                        if (deadlineDate < today) {
+                            deadlineColorClass = 'text-red-500 dark:text-red-400 font-semibold';
+                            deadlineSpan.textContent += ' - OVERDUE';
+                        } else if (deadlineDate.getTime() === today.getTime()) {
+                            deadlineColorClass = 'text-orange-500 dark:text-orange-400 font-semibold';
+                            deadlineSpan.textContent += ' - TODAY';
+                        }
+                        deadlineSpan.classList.add(...deadlineColorClass.split(' '));
+                        taskContent.appendChild(deadlineSpan);
+                    }
+                }
+
+                li.appendChild(taskContent);
+
+                // --- Action Buttons ---
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = 'flex-shrink-0 flex items-center space-x-1.5';
+
+                if (task.isEditing) {
+                    // Save Button
+                    const saveButton = document.createElement('button');
+                    saveButton.innerHTML = '<i class="fas fa-save"></i>';
+                    saveButton.className = 'px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded';
+                    saveButton.title = 'Save Changes';
+                    saveButton.onclick = (e) => { e.stopPropagation(); saveTaskEdit(task.id); };
+                    buttonsDiv.appendChild(saveButton);
+
+                    // Cancel Button
+                    const cancelButton = document.createElement('button');
+                    cancelButton.innerHTML = '<i class="fas fa-times"></i>';
+                    cancelButton.className = 'px-2 py-1 text-xs bg-gray-400 hover:bg-gray-500 text-white rounded';
+                    cancelButton.title = 'Cancel Edit';
+                    cancelButton.onclick = (e) => { e.stopPropagation(); cancelTaskEdit(task.id); };
+                    buttonsDiv.appendChild(cancelButton);
+
+                } else {
+                    // Complete/Undo Button
+                    const completeButton = document.createElement('button');
+                    completeButton.innerHTML = task.completed ? '<i class="fas fa-undo"></i>' : '<i class="fas fa-check"></i>';
+                    completeButton.className = `px-2 py-1 text-xs rounded ${task.completed ? 'bg-yellow-400 hover:bg-yellow-500 text-black dark:text-white' : 'bg-green-500 hover:bg-green-600 text-white'}`;
+                    completeButton.title = task.completed ? 'Mark as Incomplete' : 'Mark as Complete';
+                    completeButton.onclick = (e) => { e.stopPropagation(); toggleTaskComplete(task.id); };
+                    buttonsDiv.appendChild(completeButton);
+
+                    // Edit Button (only if not completed)
+                    if (!task.completed) {
+                        const editButton = document.createElement('button');
+                        editButton.innerHTML = '<i class="fas fa-pencil-alt"></i>';
+                        editButton.className = 'px-2 py-1 text-xs bg-blue-400 hover:bg-blue-500 text-white rounded';
+                        editButton.title = 'Edit Task';
+                        editButton.onclick = (e) => { e.stopPropagation(); editTask(task.id); };
+                        buttonsDiv.appendChild(editButton);
+                    }
+
+                    // Delete Button
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteButton.className = 'px-2 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded';
+                    deleteButton.title = 'Delete Task';
+                    deleteButton.onclick = (e) => {
+                        e.stopPropagation();
+                        if (confirm(`Are you sure you want to delete task: "${task.description}"?`)) {
+                             deleteTask(task.id);
+                        }
+                    };
+                    buttonsDiv.appendChild(deleteButton);
+                }
+
+                li.appendChild(buttonsDiv);
+                taskList.appendChild(li);
+            });
+            updateWeeklyReview(); // Update review whenever tasks change
+        }
+
+        // Add Task (unchanged)
+        function addTask(description, deadline, priority) {
+            const newTask = { id: Date.now(), description, deadline: deadline || null, priority: priority || 'low', completed: false, isEditing: false, createdAt: new Date().toISOString() };
+            tasks.push(newTask);
+            saveTasks();
+            renderTasks();
+        }
+
+        // Delete Task (unchanged)
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            saveTasks();
+            renderTasks();
+        }
+
+        // Toggle Task Completion (Added sound)
+        function toggleTaskComplete(id) {
+            let taskCompleted = false;
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    const updatedTask = { ...task, completed: !task.completed, isEditing: false };
+                    if (updatedTask.completed) {
+                        taskCompleted = true;
+                    }
+                    return updatedTask;
+                }
+                return task;
+            });
+
+            if (taskCompleted) {
+                triggerConfetti();
+                if (taskCompleteSound) taskCompleteSound(); // Play sound if initialized
+            }
+
+            saveTasks();
+            renderTasks();
+        }
+
+        // Edit Task (unchanged)
+        function editTask(id) {
+            tasks = tasks.map(task => task.id === id ? { ...task, isEditing: true } : { ...task, isEditing: false });
+            renderTasks();
+        }
+
+        // Save Task Edit (unchanged)
+        function saveTaskEdit(id) {
+             const taskLi = taskList.querySelector(`li[data-id="${id}"]`);
+             if (!taskLi) return;
+             const newDescriptionInput = taskLi.querySelector('.task-edit-description');
+             const newDeadlineInput = taskLi.querySelector('.task-edit-deadline');
+             const newDescription = newDescriptionInput.value.trim();
+             const newDeadline = newDeadlineInput.value;
+             if (!newDescription) { alert("Task description cannot be empty."); newDescriptionInput.focus(); return; }
+            tasks = tasks.map(task => task.id === id ? { ...task, description: newDescription, deadline: newDeadline || null, isEditing: false } : task);
+            saveTasks();
+            renderTasks();
+        }
+
+         // Cancel Task Edit (unchanged)
+        function cancelTaskEdit(id) {
+             tasks = tasks.map(task => task.id === id ? { ...task, isEditing: false } : task);
+             renderTasks();
+        }
+
+        // Save Tasks to localStorage (unchanged)
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Event listener for task form submission (unchanged)
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const description = taskInput.value.trim();
+            const deadline = taskDeadlineInput.value;
+            const priority = taskPriorityInput.value;
+            if (description) {
+                addTask(description, deadline, priority);
+                taskInput.value = '';
+                taskDeadlineInput.value = '';
+                taskPriorityInput.value = 'medium';
+            }
+        });
+
+        // Event listener for search input
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            renderTasks(); // Re-render tasks based on search
+        });
+
+        // Event listener for filter buttons
+        filterButtonsContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const filterValue = e.target.dataset.filter;
+                if (filterValue) {
+                    currentFilter = filterValue;
+                    // Update active button style
+                    filterButtonsContainer.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    renderTasks(); // Re-render tasks based on filter
+                }
+            }
+        });
+
+
+        // --- Pomodoro Timer --- (Added sound on completion)
+        function updateTimerDisplay() {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (isRunning) return;
+            isRunning = true;
+            startPauseButton.innerHTML = '<i class="fas fa-pause mr-1"></i>Pause';
+            startPauseButton.classList.replace('bg-yellow-500', 'bg-orange-500');
+            startPauseButton.classList.replace('hover:bg-yellow-600', 'hover:bg-orange-600');
+            timerStatus.textContent = `Status: Running (${isWorkSession ? 'Work' : 'Break'})`;
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                    if (timerEndSound) timerEndSound(); // Play sound if initialized
+                    alert(`Time's up! Starting ${!isWorkSession ? 'Work' : 'Break'} session.`);
+                    isWorkSession = !isWorkSession;
+                    resetTimer();
+                    return;
+                }
+                totalSeconds--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (!isRunning) return;
+            isRunning = false;
+            clearInterval(timerInterval);
+            startPauseButton.innerHTML = '<i class="fas fa-play mr-1"></i>Resume';
+            startPauseButton.classList.replace('bg-orange-500', 'bg-yellow-500');
+            startPauseButton.classList.replace('hover:bg-orange-600', 'hover:bg-yellow-600');
+            timerStatus.textContent = `Status: Paused (${isWorkSession ? 'Work' : 'Break'})`;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            totalSeconds = isWorkSession ? workDuration : breakDuration;
+            updateTimerDisplay();
+            startPauseButton.innerHTML = '<i class="fas fa-play mr-1"></i>Start';
+            startPauseButton.classList.replace('bg-orange-500', 'bg-yellow-500');
+            startPauseButton.classList.replace('hover:bg-orange-600', 'hover:bg-yellow-600');
+            timerStatus.textContent = `Status: Ready (${isWorkSession ? 'Work' : 'Break'})`;
+        }
+
+        startPauseButton.addEventListener('click', () => {
+            initSounds(); // Ensure sounds are ready when timer is first used
+            if (isRunning) { pauseTimer(); }
+            else { if (totalSeconds <= 0) { resetTimer(); } startTimer(); }
+        });
+
+        resetButton.addEventListener('click', () => {
+            if (confirm(`Reset timer to ${isWorkSession ? 'Work (25:00)' : 'Break (05:00)'}?`)) { resetTimer(); }
+        });
+
+        // --- Weekly Review --- (Unchanged)
+        function updateWeeklyReview() {
+            const oneWeekAgo = new Date(); oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); oneWeekAgo.setHours(0, 0, 0, 0);
+            const relevantTasks = tasks.filter(task => new Date(task.createdAt) >= oneWeekAgo);
+            const completedTasks = relevantTasks.filter(task => task.completed);
+            const totalRelevant = relevantTasks.length; const totalCompleted = completedTasks.length;
+            const percentage = totalRelevant === 0 ? 0 : Math.round((totalCompleted / totalRelevant) * 100);
+            weeklyProgressBar.style.width = `${percentage}%`; weeklyProgressPercentage.textContent = `${percentage}%`; reviewStats.textContent = `(${totalCompleted} / ${totalRelevant} tasks)`;
+        }
+
+        // --- Motivational Quotes --- (Unchanged)
+        const quotes = [ { text: "The best way to predict the future is to create it.", author: "Peter Drucker" }, { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" }, { text: "The key is not to prioritize what's on your schedule, but to schedule your priorities.", author: "Stephen Covey" }, { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" }, { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" }, { text: "Act as if what you do makes a difference. It does.", author: "William James" }, { text: "Focus on being productive instead of busy.", author: "Tim Ferriss"} ];
+        function displayRandomQuote() { const randomIndex = Math.floor(Math.random() * quotes.length); quoteText.textContent = `"${quotes[randomIndex].text}"`; quoteAuthor.textContent = `- ${quotes[randomIndex].author}`; }
+
+        // --- Confetti --- (Unchanged)
+        function triggerConfetti() { confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } }); }
+
+        // --- Chatbot Logic --- (Adapted message bubble classes)
+        function openChat() { chatWindow.classList.remove('hidden', 'opacity-0', 'scale-95'); chatWindow.classList.add('opacity-100', 'scale-100'); chatToggleButton.classList.add('hidden'); chatInput.focus(); }
+        function closeChat() { chatWindow.classList.add('opacity-0', 'scale-95'); setTimeout(() => { chatWindow.classList.add('hidden'); chatToggleButton.classList.remove('hidden'); }, 300); }
+        chatToggleButton.addEventListener('click', openChat);
+        closeChatButton.addEventListener('click', closeChat);
+
+        function sendChatMessage() {
+            const messageText = chatInput.value.trim(); if (messageText === '') return;
+            appendChatMessage(messageText, 'user'); chatInput.value = ''; sendButton.disabled = true; adjustTextareaHeight();
+            setTimeout(() => { const botResponse = getChatbotResponse(messageText); appendChatMessage(botResponse, 'bot'); sendButton.disabled = false; }, 800);
+        }
+
+        function appendChatMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            const messageBubble = document.createElement('div');
+            // Apply user/bot specific classes here
+            const bubbleClass = sender === 'user' ? 'user-msg' : 'bot-msg';
+            messageBubble.classList.add('chat-message', bubbleClass, 'p-3', 'rounded-lg', 'shadow');
+            messageBubble.textContent = text;
+
+            if (sender === 'user') { messageDiv.classList.add('flex', 'justify-end'); messageBubble.classList.add('rounded-br-none'); }
+            else { messageDiv.classList.add('flex', 'justify-start'); messageBubble.classList.add('rounded-bl-none'); }
+            messageDiv.appendChild(messageBubble); chatMessages.appendChild(messageDiv); chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Basic Chatbot Response Logic (Unchanged)
+        function getChatbotResponse(userMessage) { const lowerCaseMessage = userMessage.toLowerCase(); if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) { return 'Hi there! Need help organizing or focusing?'; } else if (lowerCaseMessage.includes('task') || lowerCaseMessage.includes('add')) { return 'You can add tasks using the form on the left. Remember to set a priority!'; } else if (lowerCaseMessage.includes('timer') || lowerCaseMessage.includes('pomodoro')) { return 'The Pomodoro timer is on the right. Use it for focused work sessions!'; } else if (lowerCaseMessage.includes('help')) { return 'I can offer simple tips. Try adding tasks, using the timer, or just ask me a general question!'; } else if (lowerCaseMessage.includes('quote')) { displayRandomQuote(); return 'I just updated the quote for you! Need another?'; } else if (lowerCaseMessage.includes('bye') || lowerCaseMessage.includes('thanks')) { return 'You got this! Keep up the great work!'; } else { const randomResponses = [ "Remember to take breaks! The Pomodoro timer can help.", "Prioritizing tasks can make a big difference. Use the High/Medium/Low options.", "Got any tasks overdue? Check the deadlines!", "How's your weekly progress looking?" ]; return randomResponses[Math.floor(Math.random() * randomResponses.length)]; } }
+        chatInput.addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); sendChatMessage(); } });
+        sendButton.addEventListener('click', sendChatMessage);
+
+        function adjustTextareaHeight() { chatInput.style.height = 'auto'; const maxHeight = 100; chatInput.style.height = `${Math.min(chatInput.scrollHeight, maxHeight)}px`; chatInput.style.overflowY = chatInput.scrollHeight > maxHeight ? 'auto' : 'hidden'; }
+        chatInput.addEventListener('input', adjustTextareaHeight);
+
+        // --- Icon Fallback --- (Unchanged)
+        window.addEventListener('load', () => { const faIcon = chatToggleButton.querySelector('i'); const svgIcon = chatToggleButton.querySelector('svg'); if (faIcon && svgIcon && faIcon.offsetWidth === 0) { faIcon.style.display = 'none'; svgIcon.classList.remove('hidden'); } });
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(currentTheme); // Apply saved theme
+            renderTasks();
+            resetTimer();
+            updateWeeklyReview();
+            displayRandomQuote();
+            adjustTextareaHeight();
+             // Set initial filter button state
+            filterButtonsContainer.querySelector(`button[data-filter="${currentFilter}"]`)?.classList.add('active');
+        });
+
+    </script>
+
+</body>
+</html>
