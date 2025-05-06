@@ -458,3 +458,113 @@ document.documentElement.classList.remove('dark');
                         </div>
                         </div>
                         </section>
+                        <section id="faq" class="py-20 md:py-28 bg-gray-50 dark:bg-gray-800">
+                            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">Frequently Asked Questions</h2>
+                            <div class="space-y-6">
+                            <div class="faq-question" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="text-xl font-semibold mb-2">Is TimeSaver really free?</h3>
+                            <p class="faq-answer">Yes! TimeSaver is completely free to use. Our goal is to provide a simple, effective time management tool accessible to all students.</p>
+                            </div>
+                            <hr class="border-gray-200 dark:border-gray-700">
+                            <div class="faq-question" data-aos="fade-up" data-aos-delay="200">
+                            <h3 class="text-xl font-semibold mb-2">What is the Pomodoro Technique?</h3>
+                            <p class="faq-answer">It's a time management method where you break down work into intervals, typically 25 minutes in length (called 'pomodoros'), separated by short breaks. It helps improve focus and prevent mental fatigue.</p>
+                            </div>
+                            <hr class="border-gray-200 dark:border-gray-700">
+                            <div class="faq-question" data-aos="fade-up" data-aos-delay="300">
+                            <h3 class="text-xl font-semibold mb-2">Can I use TimeSaver on my phone?</h3>
+                            <p class="faq-answer">TimeSaver is currently a web-based application, meaning you can access it through any web browser on your computer, tablet, or phone. A dedicated mobile app might be considered in the future!</p>
+                            </div>
+                            <hr class="border-gray-200 dark:border-gray-700">
+                            <div class="faq-question" data-aos="fade-up" data-aos-delay="400">
+                            <h3 class="text-xl font-semibold mb-2">How does the weekly progress tracking work?</h3>
+                            <p class="faq-answer">TimeSaver tracks the tasks you mark as completed each day. At the end of the week, it shows you a simple visual representation of your completion rate to help you stay motivated and identify patterns.</p>
+                            </div>
+                            </div>
+                            </div>
+                            </section>
+                            
+                            
+                            <footer class="bg-gray-900 dark:bg-black text-gray-400 py-10">
+                            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <div class="flex justify-center space-x-6 mb-6">
+                            <a href="#" class="footer-icon transition duration-300 text-gray-500 hover:text-indigo-400" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#" class="footer-icon transition duration-300 text-gray-500 hover:text-indigo-400" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="footer-icon transition duration-300 text-gray-500 hover:text-indigo-400" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="footer-icon transition duration-300 text-gray-500 hover:text-indigo-400" aria-label="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                            </div>
+                            <p class="text-sm">
+                            &copy; <span id="current-year"></span> TimeSaver. Built to help students make the most of their time.
+                            </p>
+                            <p class="text-xs mt-2 text-gray-500">Design inspired by modern landing page trends.</p>
+                            </div>
+                            </footer>
+                            
+                            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                            <script>
+                            // Initialize AOS
+                            AOS.init({
+                            duration: 800, // values from 0 to 3000, with step 50ms
+                            once: true, // whether animation should happen only once - while scrolling down
+                            });
+                            
+                            // Set current year in footer
+                            document.getElementById('current-year').textContent = new Date().getFullYear();
+                            
+                            // --- Theme Toggle Script ---
+                            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+                            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+                            const themeToggleButton = document.getElementById('theme-toggle');
+                            
+                            // Function to set theme
+                            function setTheme(isDark) {
+                            if (isDark) {
+                            document.documentElement.classList.add('dark');
+                            themeToggleLightIcon.classList.remove('hidden');
+                            themeToggleDarkIcon.classList.add('hidden');
+                            localStorage.setItem('theme', 'dark');
+                            } else {
+                            document.documentElement.classList.remove('dark');
+                            themeToggleDarkIcon.classList.remove('hidden');
+                            themeToggleLightIcon.classList.add('hidden');
+                            localStorage.setItem('theme', 'light');
+                            }
+                            }
+                            
+                            // Set initial icon state based on current theme
+                            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                            setTheme(true); // Set initial state to dark
+                            } else {
+                            setTheme(false); // Set initial state to light
+                            }
+                            
+                            themeToggleButton.addEventListener('click', () => {
+                            // toggle icons and theme
+                            setTheme(!document.documentElement.classList.contains('dark'));
+                            });
+                            
+                            // Simple mobile menu toggle (optional, requires more setup for full functionality)
+                            const menuButton = document.querySelector('[aria-label="Open menu"]');
+                            const mobileMenu = document.querySelector('.md\\:hidden.hidden.bg-white'); // Target the initially hidden menu
+                            
+                            if (menuButton && mobileMenu) {
+                            menuButton.addEventListener('click', () => {
+                            mobileMenu.classList.toggle('hidden');
+                            });
+                            }
+                            
+                            // Apply hover style for CTA buttons using JS for variables
+                            document.querySelectorAll('.cta-button[style*="background-color: var(--button-primary-bg)"]').forEach(button => {
+                                button.addEventListener('mouseover', function() {
+                                    this.style.backgroundColor = 'var(--button-primary-hover)';
+                                });
+                                button.addEventListener('mouseout', function() {
+                                    this.style.backgroundColor = 'var(--button-primary-bg)';
+                                });
+                            });
+                            
+                            </script>
+                            
+                            </body>
+                            </html>
